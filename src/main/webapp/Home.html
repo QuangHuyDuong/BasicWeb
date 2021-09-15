@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+</head>
+<style>
+.paging{
+  position: relative;
+  left: 50%;
+  transform : translateX(-5%);
+}
+
+</style>
+<body>
+    <div class="container">
+        <div class="menu">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <a class="navbar-brand" href="#">Navbar</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                  <ul class="navbar-nav" id ="navbarnav">
+                    <li class="nav-item active">
+                      <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item active">
+                      <a class="nav-link" onclick = "viewCart()">Cart<span class="sr-only">(current)</span></a>
+                    </li>
+                   
+                  </ul>
+                </div>
+              </nav>
+
+        </div>
+
+
+        <div class="content">
+            <div class= "container-fluid">
+               
+              
+                <div class= "row">
+            
+                </div>
+             </div>
+        </div>
+    </div>
+    <nav aria-label="Page navigation example" class="paging">
+      <ul class="pagination">
+       
+      </ul>
+    </nav>
+    
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	
+	 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
+	
+	 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>   
+
+<script type="text/javascript" src="JS/Home.js"></script>
+<script src="JS/AddCart.js"></script>
+<script src="JS/viewCart.js"></script>
+<script src="JS/LogOut.js"></script>
+
+</body>
+</html>

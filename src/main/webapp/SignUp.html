@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    Username <input type="text" id="username">
+    <br>
+    Password <input type="password" id="password">
+    <br>
+    Confirm Password <input type="password" id="re_password">
+    <br>
+
+    <button onclick="submitForm()">Sign up</button>
+    <script>
+        function submitForm() {
+            console.log("abc")
+            let username = document.getElementById("username").value
+            let password = document.getElementById("password").value
+            let re_password = document.getElementById("re_password").value
+            
+                let user = {
+                    username :  username,
+                    password :  password
+                }
+            if(password != re_password){
+                alert("Mat khau khong trung khop")
+            } else {
+                fetch('http://localhost:8080/Web/client/SignUp', {
+                    method: "POST",
+                    body: JSON.stringify(user),
+                    headers: {
+                        'Content-type': 'application/json; charset=UTF-8'
+                    }
+                })
+            alert("dang ky thanh cong")
+            location.replace("http://localhost:8080/Web/Home.html");  
+            }
+            }
+        
+
+
+    </script>
+</body>
+
+</html>

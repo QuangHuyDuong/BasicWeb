@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+        <a href="Home.html">Home</a>
+    </nav>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+
+                <th scope="col">Username</th>
+                <th scope="col">Password</th>
+                <th scope="col">Role</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody class="content">
+
+        </tbody>
+    </table>
+
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+    <script>
+        fetch('http://localhost:8080/Web/admin/CRUDCustomer')
+            .then(response => response.json())
+            .then(data => {
+                let html = ""
+                data.forEach(element => {
+                    html += `<tr>
+                         <td>${element.username}</td>
+                        <td>${element.password}</td>`
+                    if(element.isAdmin == 1) {
+                        html +=`<td>Admin</td>` 
+                    }  else{
+                        html +=`<td>Customer</td>` 
+                    }   
+                    html +=` </tr>
+								<tr>
+								 <div>
+                                    Update password <input type="text" id="${element.username}_password">
+                                    <select  id="${element.username}_role">
+                                        <option value="admin">Admin</option>
+                                        <option value="customer">Customer</option>
+        
+                                     </select>
+	                                <button onclick = "updateCustomer('${element.username}')">Confirm</button>
+                                    </div>
+						</tr>`
+                    document.querySelector(".content").innerHTML = html
+                });
+
+            })
+        function updateCustomer(username) {
+            let password = document.getElementById(username + "_password").value
+            let isAdmin = 0;
+            if (document.getElementById(username + "_role").value == "admin") {
+                isAdmin = 1
+            }
+           let user = {
+                username : username,
+                password : password,
+                isAdmin : isAdmin
+
+           }
+            fetch('http://localhost:8080/Web/admin/CRUDCustomer', {
+                method: "PUT",
+                body: JSON.stringify(user),
+                headers: {
+                    'Content-type': 'application/json; charset=UTF-8'
+                }
+            })
+                .then(response => response.json())
+
+
+        }
+       
+
+    </script>
+</body>
+
+</html>

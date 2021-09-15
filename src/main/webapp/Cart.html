@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+</head>
+
+<body>
+
+	<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+		<a href="Home.html">Home</a>
+	</nav>
+	<table class="table table-striped">
+		<thead>
+			<tr>
+
+				<th scope="col">Mã sản phẩm</th>
+				<th scope="col">Tên sản phẩm</th>
+				<th scope="col">
+
+				</th>
+			</tr>
+		</thead>
+		<tbody class="content">
+
+		</tbody>
+	</table>
+
+
+	<ul class="pagination">
+
+	</ul>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
+
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+	<script>
+
+		renderProduct();
+		function renderProduct() {
+			var list = document.querySelector(".content")
+			let html = ""
+			fetch('http://localhost:8080/Web/client/viewCart')
+				.then(response => response.json())
+				.then(function (data) {
+					let index = 0;
+					data.forEach(element => {
+						
+						html += `<tr id ='${element.id}'>
+                     <td>${element.id}</td>
+                     <td>${element.name}</td>
+                    <td>
+                    <button onclick = "removeProduct('${element.id}')">DELETE FROM CART</button>
+  
+                    </td>
+                    </tr>`
+					index++;
+					});
+					list.innerHTML = html
+				});
+		}
+		function removeProduct(id) {
+			let product = {
+				id : id
+			}
+			fetch('http://localhost:8080/Web/client/removeProduct', {
+				method: 'POST',
+				body: JSON.stringify(product),
+				headers: {
+					'Content-Type': 'application/json'
+				}
+			})
+				.then(response => {
+					document.getElementById(id).remove()
+				})
+
+		}
+
+	</script>
+
+</body>
+
+</html>

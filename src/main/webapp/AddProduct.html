@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+</head>
+
+<body>
+	<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+		<a href="Home.html">Home</a>
+		
+	</nav>
+
+	Ma san pham<input type="text" id="id">
+	<br>
+	Ten san pham<input type="text" id="name">
+	<br>
+	<button onclick="addProduct()">Add</button>
+
+
+	
+	<script type="text/javascript">
+		function addProduct() {
+			let id = document.getElementById("id").value
+			let name = document.getElementById("name").value
+			let product = {
+				id : id,
+				name :name
+			}
+			fetch('http://localhost:8080/Web/admin/CRUDProduct', {
+				method: 'POST',
+				body: JSON.stringify(product),
+				headers: {
+					'Content-Type': 'application/json'
+				}
+			})
+				.then(response => response.json())
+				.then(result => {
+					if(result.responseStr == "Success") alert("Them thanh cong san pham")
+					else alert("San pham da ton tai")
+				}) 
+		}
+
+	</script>
+</body>
+
+</html>
